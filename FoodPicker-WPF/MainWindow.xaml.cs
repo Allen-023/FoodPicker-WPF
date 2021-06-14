@@ -28,15 +28,26 @@ namespace FoodPicker_WPF
             InitializeComponent();
 
            
+
+           
         }
 
         // Generate a random int. Use the random number for an index of the food list and display to user.
         private void PickButton_Click(object sender, RoutedEventArgs e)
         {
-            Random rndNum = new Random();
-            int randomNumber = rndNum.Next(0,foodItemList.Count());
 
-            OutputTextBox.Text = foodItemList[randomNumber].ToString();     
+            if (foodItemList.Count != 0)
+            {
+                Random rndNum = new Random();
+                int randomNumber = rndNum.Next(0, foodItemList.Count());
+
+                OutputTextBox.Text = foodItemList[randomNumber].ToString();
+            }
+            else
+            {
+                MessageBox.Show("There is currently no food in the list.");
+            }
+
         }
 
         // Adds user input to the food list then prompts the user.
@@ -49,6 +60,9 @@ namespace FoodPicker_WPF
             else
             {
                 foodItemList.Add(InputTextBox.Text);
+
+                FoodListBox.Items.Add(InputTextBox.Text); //*****************
+
                 MessageBox.Show(InputTextBox.Text + " has been added.");
                 InputTextBox.Text = "";
             }
@@ -62,6 +76,9 @@ namespace FoodPicker_WPF
             {
 
                 foodItemList.Remove(InputTextBox.Text);
+
+                FoodListBox.Items.Remove(InputTextBox.Text); //********
+
                 MessageBox.Show(InputTextBox.Text + " has been deleted.");
                 InputTextBox.Text = "";
             }
