@@ -6,18 +6,24 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 
+
 namespace FoodPicker_WPF
 {
     public partial class MainWindow : Window
     {
 
-        protected List<string> foodItemList = new List<string>();
+
+
+        public static List<string> foodItemList = new List<string>();
+
+        
+
 
         public MainWindow()
         {
-
             InitializeComponent();
-            ReadFile();
+            WriteAndReadFile.ReadFile(FoodListBox);
+
 
         }
 
@@ -28,7 +34,7 @@ namespace FoodPicker_WPF
             {
                 case MessageBoxResult.Yes:
                     MessageBox.Show("Saved...Closing...", "Save and exit");
-                    WriteFile();
+                    WriteAndReadFile.WriteFile();
                     e.Cancel = false;
                     break;
                 case MessageBoxResult.No:
@@ -66,10 +72,10 @@ namespace FoodPicker_WPF
         {
             if (InputValidationCheck(InputTextBox.Text) == true)
             {
-                foodItemList.Add(InputTextBox.Text);
-                FoodListBox.Items.Add(InputTextBox.Text);
+                foodItemList.Add(InputTextBox.Text.Trim());
+                FoodListBox.Items.Add(InputTextBox.Text.Trim());
 
-                MessageBox.Show(InputTextBox.Text + " has been added.", "Added");
+                MessageBox.Show(InputTextBox.Text.Trim() + " has been added.", "Added");
                 InputTextBox.Text = "";
             }
 
@@ -93,6 +99,7 @@ namespace FoodPicker_WPF
 
         }
 
+        /********************************************************************************************
         //Writes the list to .txt file
         private void WriteFile()
         {
@@ -115,7 +122,7 @@ namespace FoodPicker_WPF
                 FoodListBox.Items.Add(line);
             }
 
-        }
+        }*////////
 
 
         // Input validation check
