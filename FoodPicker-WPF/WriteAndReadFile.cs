@@ -31,5 +31,4 @@ namespace FoodPicker_WPF
 
     }
 
-
 }

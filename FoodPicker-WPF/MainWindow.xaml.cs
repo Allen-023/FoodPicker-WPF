@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 
 
@@ -12,21 +10,16 @@ namespace FoodPicker_WPF
     public partial class MainWindow : Window
     {
 
-
-
         public static List<string> foodItemList = new List<string>();
-
-        
-
 
         public MainWindow()
         {
             InitializeComponent();
             WriteAndReadFile.ReadFile(FoodListBox);
-            
 
         }
 
+        // Prompts user end dialog and saves data accordingly.
         protected override void OnClosing(CancelEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Do you want to save your changes before exiting?", "Save and exit", MessageBoxButton.YesNoCancel);
@@ -90,7 +83,7 @@ namespace FoodPicker_WPF
                 foodItemList.Remove(InputTextBox.Text);
                 FoodListBox.Items.Remove(InputTextBox.Text);
 
-                MessageBox.Show(InputTextBox.Text + " has been deleted.", "Deleted");     
+                MessageBox.Show(InputTextBox.Text + " has been deleted.", "Deleted");
             }
             else
             {
@@ -101,7 +94,7 @@ namespace FoodPicker_WPF
 
         }
 
-        
+
 
     }
 }

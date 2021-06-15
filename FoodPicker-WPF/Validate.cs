@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 
 namespace FoodPicker_WPF
@@ -12,6 +8,7 @@ namespace FoodPicker_WPF
         // Input validation check
         public static bool InputValidationCheck(string input)
         {
+
             if (foodItemList.Contains(input))
             {
                 MessageBox.Show("That food item is has been already added. \nTry another food item.", "Error");
