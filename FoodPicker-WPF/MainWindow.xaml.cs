@@ -8,9 +8,6 @@ using System.Windows;
 
 namespace FoodPicker_WPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
 
@@ -50,7 +47,6 @@ namespace FoodPicker_WPF
         // Generate a random int. Use the random number for an index of the food list and display to user.
         private void PickButton_Click(object sender, RoutedEventArgs e)
         {
-
             if (foodItemList.Count != 0)
             {
                 Random rndNum = new Random();
@@ -68,11 +64,7 @@ namespace FoodPicker_WPF
         // Adds user input to the food list then prompts the user.
         private void AddFoodButton_Click(object sender, RoutedEventArgs e)
         {
-            if (foodItemList.Contains(InputTextBox.Text))
-            {
-                MessageBox.Show("That food item is has been already added. \nTry another food item.", "Error");
-            }
-            else
+            if (InputValidationCheck(InputTextBox.Text) == true)
             {
                 foodItemList.Add(InputTextBox.Text);
                 FoodListBox.Items.Add(InputTextBox.Text);
@@ -89,7 +81,7 @@ namespace FoodPicker_WPF
             if (foodItemList.Contains(InputTextBox.Text))
             {
                 foodItemList.Remove(InputTextBox.Text);
-                FoodListBox.Items.Remove(InputTextBox.Text); 
+                FoodListBox.Items.Remove(InputTextBox.Text);
 
                 MessageBox.Show(InputTextBox.Text + " has been deleted.", "Deleted");
                 InputTextBox.Text = "";
@@ -124,6 +116,35 @@ namespace FoodPicker_WPF
             }
 
         }
+
+
+        // Input validation check
+        public bool InputValidationCheck(string input)
+        {
+            if (foodItemList.Contains(input))
+            {
+                MessageBox.Show("That food item is has been already added. \nTry another food item.", "Error");
+                return false;
+            }
+            else if (input == "")
+            {
+                MessageBox.Show("Input field is blank. \nTry a food item.", "Error");
+                return false;
+            }
+            else if (input.Any(char.IsDigit))
+            {
+                MessageBox.Show("Foods don't have numbers. \nTry a food item.", "Error");
+                InputTextBox.Text = "";
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+
 
 
     }
