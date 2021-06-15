@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,11 +27,35 @@ namespace FoodPicker_WPF
         
         public MainWindow()
         {
+            
             InitializeComponent();
+            ReadFile();
 
-           
+        }
 
-           
+        protected override void OnClosing(CancelEventArgs e)
+        {
+
+
+            MessageBoxResult result = MessageBox.Show("Do you want to save your changes before exiting?", "Save and exit", MessageBoxButton.YesNoCancel);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    MessageBox.Show("Saved...Closing...", "Save and exit");
+                    WriteFile();
+                    e.Cancel = false;
+                    break;
+                case MessageBoxResult.No:
+                    MessageBox.Show("Closing...", "Save and exit");
+                    e.Cancel = false;
+                    break;
+                case MessageBoxResult.Cancel:
+                    MessageBox.Show("Going back...", "Save and exit");
+                    e.Cancel = true;
+                    break;
+
+            }
+          
         }
 
         // Generate a random int. Use the random number for an index of the food list and display to user.
@@ -88,5 +114,34 @@ namespace FoodPicker_WPF
             }
 
         }
+
+        //Writes the list to .txt file
+        private void WriteFile()
+        {
+            TextWriter textw = new StreamWriter("FoodList.txt");
+
+            foreach (string item in foodItemList)
+            {
+                textw.WriteLine(item);
+            }
+
+            textw.Close();
+        }
+
+        // Reads the .txt file back to list
+        private void ReadFile()
+        {
+         
+
+            foreach (string line in File.ReadLines("FoodList.txt", Encoding.UTF8))
+            {
+
+                foodItemList.Add(line);
+                FoodListBox.Items.Add(line);
+            }
+
+        }
+
     }
+    
 }
