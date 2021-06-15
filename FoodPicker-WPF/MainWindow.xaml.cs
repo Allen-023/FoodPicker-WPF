@@ -4,16 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FoodPicker_WPF
 {
@@ -24,10 +15,10 @@ namespace FoodPicker_WPF
     {
 
         protected List<string> foodItemList = new List<string>();
-        
+
         public MainWindow()
         {
-            
+
             InitializeComponent();
             ReadFile();
 
@@ -35,8 +26,6 @@ namespace FoodPicker_WPF
 
         protected override void OnClosing(CancelEventArgs e)
         {
-
-
             MessageBoxResult result = MessageBox.Show("Do you want to save your changes before exiting?", "Save and exit", MessageBoxButton.YesNoCancel);
             switch (result)
             {
@@ -55,7 +44,7 @@ namespace FoodPicker_WPF
                     break;
 
             }
-          
+
         }
 
         // Generate a random int. Use the random number for an index of the food list and display to user.
@@ -71,7 +60,7 @@ namespace FoodPicker_WPF
             }
             else
             {
-                MessageBox.Show("There is currently no food in the list.");
+                MessageBox.Show("There is currently no food in the list.", "Error");
             }
 
         }
@@ -81,15 +70,14 @@ namespace FoodPicker_WPF
         {
             if (foodItemList.Contains(InputTextBox.Text))
             {
-                MessageBox.Show("That food item is has been already added. \nTry another food item.");
+                MessageBox.Show("That food item is has been already added. \nTry another food item.", "Error");
             }
             else
             {
                 foodItemList.Add(InputTextBox.Text);
+                FoodListBox.Items.Add(InputTextBox.Text);
 
-                FoodListBox.Items.Add(InputTextBox.Text); //*****************
-
-                MessageBox.Show(InputTextBox.Text + " has been added.");
+                MessageBox.Show(InputTextBox.Text + " has been added.", "Added");
                 InputTextBox.Text = "";
             }
 
@@ -100,17 +88,15 @@ namespace FoodPicker_WPF
         {
             if (foodItemList.Contains(InputTextBox.Text))
             {
-
                 foodItemList.Remove(InputTextBox.Text);
+                FoodListBox.Items.Remove(InputTextBox.Text); 
 
-                FoodListBox.Items.Remove(InputTextBox.Text); //********
-
-                MessageBox.Show(InputTextBox.Text + " has been deleted.");
+                MessageBox.Show(InputTextBox.Text + " has been deleted.", "Deleted");
                 InputTextBox.Text = "";
             }
             else
             {
-                MessageBox.Show("That food item is has not been added yet.");
+                MessageBox.Show("That food item is has not been added yet.", "Error");
             }
 
         }
@@ -131,17 +117,14 @@ namespace FoodPicker_WPF
         // Reads the .txt file back to list
         private void ReadFile()
         {
-         
-
             foreach (string line in File.ReadLines("FoodList.txt", Encoding.UTF8))
             {
-
                 foodItemList.Add(line);
                 FoodListBox.Items.Add(line);
             }
 
         }
 
+
     }
-    
 }

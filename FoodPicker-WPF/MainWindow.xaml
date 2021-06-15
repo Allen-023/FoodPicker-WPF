@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FoodPicker_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="FoodPicker" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
         <Button x:Name="PickButton" Content="Pick" HorizontalAlignment="Left" Margin="335,251,0,0" VerticalAlignment="Top" Width="75" Click="PickButton_Click"/>
         <TextBox x:Name="OutputTextBox" HorizontalAlignment="Left" Height="23" Margin="316,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -15,7 +15,7 @@
         <Button x:Name="DeleteFoodButton" Content="Delete" HorizontalAlignment="Left" Margin="385,297,0,0" VerticalAlignment="Top" Width="75" Click="DeleteFoodButton_Click"/>
         <TextBlock x:Name="InputPromptTextBlock" HorizontalAlignment="Left" Margin="258,176,0,0" TextWrapping="Wrap" Text="Input:" VerticalAlignment="Top"/>
         <TextBlock x:Name="OutputPromptTextBlock" HorizontalAlignment="Left" Margin="258,78,0,0" TextWrapping="Wrap" Text="Output:" VerticalAlignment="Top"/>
-        <ListBox x:Name="FoodListBox" HorizontalAlignment="Left" Height="100" Margin="548,78,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox x:Name="FoodListBox" HorizontalAlignment="Left" Height="239" Margin="506,78,0,0" VerticalAlignment="Top" Width="256"/>
 
     </Grid>
 </Window>
